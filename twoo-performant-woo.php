@@ -8,7 +8,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:   2Performant for WooCommerce
- * Description:   2Performant for WooCommerce 8+
+ * Description:  Full integration with 2 Performant for WooCommerce, supports 3rd party tracking, 1st party tracking and basic feed generation!
  * Version:       1.0.3
  * Author:        Eduard V. Doloc
  * Author URI:    https://rwky.ro
