@@ -21,7 +21,7 @@
  * Tags: 2performant woocommerce, 2performant, 2 performant
  */
 
-// Exit if accessed directly.
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -89,7 +89,7 @@ function tp_add_iframe_tracking( $order_id ) {
 	$order = wc_get_order( $order_id );
 	$items = $order->get_items();
 
-	// Building the description from product names and SKUs
+
 	$description = array();
 	foreach ( $items as $item ) {
 		$product       = $item->get_product();
