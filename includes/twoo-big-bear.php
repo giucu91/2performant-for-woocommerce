@@ -30,13 +30,18 @@ function twoo_robots_update( $output, $public ) {
 add_filter( 'robots_txt', 'twoo_robots_update', 10, 2 );
 
 
-function twoo_noindex_pages_with_big_bear_parameters() {
-	if ( ! empty( get_option( 'twoo_big_bear' ) ) && ( isset( $_GET['2pau'] ) || isset( $_GET['2ptt'] ) || isset( $_GET['2ptu'] ) || isset( $_GET['2prp'] ) || isset( $_GET['2pdlst'] ) ) ) {
+function twoo_noindex_bigbear() {
+	if ( ! empty( get_option( 'twoo_big_bear' ) ) &&
+	     ( isset( $_GET['2pau'] ) ||
+	       isset( $_GET['2ptt'] ) ||
+	       isset( $_GET['2ptu'] ) ||
+	       isset( $_GET['2prp'] ) ||
+	       isset( $_GET['2pdlst'] ) ) ) {
 		echo '<meta name="robots" content="noindex">';
 	}
 }
 
-add_action( 'wp_head', 'twoo_noindex_pages_with_big_bear_parameters' );
+add_action( 'wp_head', 'twoo_noindex_bigbear' );
 
 function twoo_add_order_script_to_thank_you_page( $order_id ) {
 	if ( ! empty( get_option( 'twoo_big_bear' ) ) ) {
