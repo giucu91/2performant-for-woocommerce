@@ -1,28 +1,28 @@
 <?php
-function tp_register_csv_download_endpoint() {
+function twoo_register_csv_download_endpoint() {
 	add_rewrite_rule( '^twoo-feed/?', 'index.php?products_csv_download=1', 'top' );
 	flush_rewrite_rules();
 }
 
-function tp_query_vars( $vars ) {
+function twoo_query_vars( $vars ) {
 	$vars[] = 'products_csv_download';
 
 	return $vars;
 }
 
-add_action( 'init', 'tp_register_csv_download_endpoint' );
-add_filter( 'query_vars', 'tp_query_vars' );
+add_action( 'init', 'twoo_register_csv_download_endpoint' );
+add_filter( 'query_vars', 'twoo_query_vars' );
 
-function tp_trigger_csv_download() {
+function twoo_trigger_csv_download() {
 	if ( get_query_var( 'products_csv_download' ) ) {
-		tp_generate_products_csv();
+		twoo_generate_products_csv();
 		exit;
 	}
 }
 
-add_action( 'template_redirect', 'tp_trigger_csv_download' );
+add_action( 'template_redirect', 'twoo_trigger_csv_download' );
 
-function tp_generate_products_csv() {
+function twoo_generate_products_csv() {
 	$args     = array(
 		'status' => 'publish',
 		'limit'  => - 1,
