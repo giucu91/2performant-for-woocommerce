@@ -1,5 +1,5 @@
 === 2Performant Advertiser Integration ===
-Contributors: giucu91
+Contributors: giucu91, rwky
 Tags: 2Performant, affiliate, woocommerce, 2performant
 Requires at least: 3.5
 Tested up to: 5.7

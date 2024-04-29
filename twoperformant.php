@@ -1,12 +1,4 @@
 <?php
-/*
-Plugin Name: 2Performant for WooCommerce
-Description: An integration plugin for 2Performant’s tracking code in WooCommerce based sites.
-Version: 1.0.0
-Author: George Ciobanu
-Text Domain: twoperforman
-Domain Path: /languages
-*/
 
 add_action( 'plugins_loaded', 'twoperformant_load_textdomain' );
 function twoperformant_load_textdomain(){

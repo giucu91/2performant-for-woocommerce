@@ -21,7 +21,6 @@ function twoo_trigger_csv_download() {
 }
 
 add_action( 'template_redirect', 'twoo_trigger_csv_download' );
-
 function twoo_generate_products_csv() {
 	$args     = array(
 		'status' => 'publish',
@@ -52,6 +51,15 @@ function twoo_generate_products_csv() {
 	) );
 
 	foreach ( $products as $product ) {
+		$regular_price = $product->get_regular_price();
+		$sale_price    = $product->get_sale_price();
+
+		if ( empty( $regular_price ) && empty( $sale_price ) ) {
+			continue;
+		}
+
+		$price = $sale_price && $sale_price != $regular_price ? "$regular_price/$sale_price" : $regular_price;
+
 		$category_names = array();
 		$categories     = get_the_terms( $product->get_id(), 'product_cat' );
 		if ( ! empty( $categories ) ) {
@@ -69,27 +77,28 @@ function twoo_generate_products_csv() {
 		}
 		$image_urls_string = implode( ',', $image_urls );
 
-		$regular_price = $product->get_regular_price();
-		$sale_price    = $product->get_sale_price();
-		$price         = $sale_price && $sale_price != $regular_price ? "$regular_price/$sale_price" : $regular_price;
+		$brand = ! empty( $product->get_attribute( 'brand' ) ) ? $product->get_attribute( 'brand' ) : get_bloginfo( 'name' );
+
+		//clean html
+		$description = wp_strip_all_tags( $product->get_description() );
 
 		$data = array(
 			$product->get_name(),
-			$product->get_description(),
-			'', // short message
+			$description,
+			'', // @todo: short description? maybe?
 			$price,
 			$category,
 			$subcategory,
 			get_permalink( $product->get_id() ),
 			$image_urls_string,
 			$product->get_id(),
-			'0', // generate text link
-			$product->get_attribute( 'brand' ),
+			'0', // idk why, but ok
+			$brand,
 			$product->is_in_stock() ? '1' : '0',
-			'' // other data
+			'' // idk why, but ok
 		);
 
-		// Write product data to CSV
+
 		fputcsv( $output, $data );
 	}
 
