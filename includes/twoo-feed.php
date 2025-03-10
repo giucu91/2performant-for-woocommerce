@@ -1,4 +1,9 @@
 <?php
+
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 function twoo_register_csv_download_endpoint() {
 	add_rewrite_rule( '^twoo-feed/?', 'index.php?products_csv_download=1', 'top' );
 	flush_rewrite_rules();

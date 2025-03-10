@@ -1,5 +1,8 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 //big bear
 function twoo_add_big_bear_click_script() {
 	if ( ! empty( get_option( 'twoo_big_bear' ) ) ) {
