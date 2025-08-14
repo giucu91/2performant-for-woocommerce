@@ -26,10 +26,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// HPOS compatibility declaration
+add_action( 'before_woocommerce_init', function () {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+} );
+
+
 //feed
 include_once 'includes/twoo-iframe.php';
 include_once 'includes/twoo-big-bear.php';
-include_once 'includes/twoo-feed.php';
+//include_once 'includes/twoo-feed.php';
 include_once 'includes/twoo-postmessage.php';
 include_once 'includes/twoo-updater.php';
 function twoo_add_settings_tab( $settings_tabs ) {
@@ -47,7 +55,7 @@ function twoo_settings_tab() {
 add_action( 'woocommerce_settings_tabs_twoo_performant_uprise', 'twoo_settings_tab' );
 
 function get_twoo_performant_uprise_settings() {
-	$feed_url = home_url( '/twoo-feed/' );
+	$feed_url = esc_url( home_url( '/twoo-feed/' ) );
 	$settings = array(
 		'section_title'       => array(
 			'name' => __( '2Performant Settings', 'twoo-performant-uprise' ),

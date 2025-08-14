@@ -56,7 +56,7 @@ function tp_add_order_script_to_thank_you_page( $order_id ) {
 			$categories    = wp_get_post_terms( $product->get_id(), 'product_cat', array( 'fields' => 'names' ) );
 			$categories_js = "['" . implode( "', '", $categories ) . "']";
 
-			$net_item_price_per_unit = $item->get_total() / $item->get_quantity();
+			$net_item_price_per_unit = ( $item->get_subtotal() / 1.19 ) / $item->get_quantity();
 
 			$brand = ! empty( get_option( 'twoo_big_bear_brand' ) ) ? $product->get_attribute( 'brand' ) : get_bloginfo( 'name' );
 
